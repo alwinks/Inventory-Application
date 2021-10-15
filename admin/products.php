@@ -38,6 +38,7 @@ include("header.php");
                         <tbody>
                             <?php
                             include('../config.php');
+                            // Display products
                             $sql = "SELECT * FROM tbl_product";
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {

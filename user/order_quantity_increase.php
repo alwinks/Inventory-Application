@@ -5,6 +5,7 @@ if (!$_SESSION['user_id']) {
 }
 include('../config.php');
 $order_id = $_GET['order_id'];
+// Decrease order quantity
 $sql1 = "SELECT tbl_order.order_quantity,tbl_product.product_stock FROM tbl_order INNER JOIN tbl_product ON tbl_order.product_id=tbl_product.product_id WHERE order_id='$order_id'";
 $result = mysqli_query($conn, $sql1);
 $row = mysqli_fetch_assoc($result);

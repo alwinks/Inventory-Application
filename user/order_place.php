@@ -8,6 +8,7 @@ if (isset($_POST['order'])) {
     $user_id = $_SESSION['user_id'];
     $card_number = $_POST['card_number'];
     $card_cvc = $_POST['card_cvc'];
+    // Validate user card details to place order
     $sql = "SELECT * FROM tbl_card WHERE card_number='$card_number' AND card_cvc='$card_cvc' AND user_id='$user_id'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
@@ -51,6 +52,7 @@ include("header.php");
                             <div class="col-sm-12 d-flex">
                                 <?php
                                 $user_id = $_SESSION['user_id'];
+                                // Display sum of orders
                                 $sql = "SELECT SUM(order_amount) AS total FROM tbl_order WHERE user_id='$user_id' AND order_status='Cart'";
                                 $result = mysqli_query($conn, $sql);
                                 $row = mysqli_fetch_assoc($result);
@@ -82,6 +84,7 @@ include("header.php");
                                 <?php
                                 include('../config.php');
                                 $user_id = $_SESSION['user_id'];
+                                // Display order details
                                 $sql = "SELECT tbl_product.product_name,tbl_product.product_img,tbl_product.product_desc,tbl_product.product_rate,tbl_order.order_quantity,tbl_order.order_amount FROM tbl_order INNER JOIN tbl_product ON tbl_order.product_id=tbl_product.product_id INNER JOIN tbl_user ON tbl_order.user_id=tbl_user.user_id WHERE tbl_user.user_id='$user_id' AND order_status='Cart'";
                                 $result = mysqli_query($conn, $sql);
                                 if (mysqli_num_rows($result) > 0) {

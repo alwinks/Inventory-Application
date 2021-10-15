@@ -10,6 +10,7 @@ if (isset($_POST['product_add'])) {
   $product_desc = $_POST['product_desc'];
   $product_rate = $_POST['product_rate'];
   $product_stock = $_POST['product_stock'];
+  // Add new product
   $sql = "INSERT INTO tbl_product (product_name,product_img,product_desc,product_rate,product_stock) VALUES ('$product_name','$product_img','$product_desc','$product_rate','$product_stock')";
   if (mysqli_query($conn, $sql)) {
     header("Location: products.php");
@@ -46,7 +47,7 @@ include("header.php");
             <div class="form-group">
               <label class="col-md-12 mb-0">Product Image</label>
               <div class="col-md-12">
-                <input required name="product_img" value="<?php echo $row['product_img']; ?>" type="file">
+                <input required name="product_img" type="file">
               </div>
             </div>
             <div class="form-group">

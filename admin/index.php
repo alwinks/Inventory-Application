@@ -35,6 +35,7 @@ include("header.php");
                         <tbody>
                             <?php
                             include('../config.php');
+                            // Display order details
                             $sql = "SELECT tbl_product.product_name,tbl_product.product_img,tbl_product.product_desc,tbl_order.order_quantity,tbl_order.order_amount,tbl_user.user_username FROM tbl_order INNER JOIN tbl_product ON tbl_order.product_id=tbl_product.product_id INNER JOIN tbl_user ON tbl_order.user_id=tbl_user.user_id WHERE tbl_order.order_status='Success'";
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {

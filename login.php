@@ -1,4 +1,5 @@
 <?php
+// Validate user login details
 session_start();
 include('config.php');
 if (isset($_POST['user_login'])) {

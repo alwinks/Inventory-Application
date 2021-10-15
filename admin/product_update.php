@@ -40,6 +40,7 @@ include("header.php");
           <form class="form-horizontal form-material mx-2" name="product_update" method="POST" action="<?php $_PHP_SELF ?>">
             <?php
             $product_id = $_GET['product_id'];
+            // Update product
             $sql = "SELECT * FROM tbl_product WHERE product_id='$product_id'";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($result);
@@ -71,7 +72,7 @@ include("header.php");
             <div class="form-group">
               <label class="col-md-12 mb-0">Product Stock</label>
               <div class="col-md-12">
-                <input required name="product_stock" value="<?php echo $row['product_stock'];; ?>" type="number" placeholder="Enter new product stock" class="form-control ps-0 form-control-line">
+                <input required name="product_stock" value="<?php echo $row['product_stock']; ?>" type="number" placeholder="Enter new product stock" class="form-control ps-0 form-control-line">
               </div>
             </div>
             <div class="form-group">

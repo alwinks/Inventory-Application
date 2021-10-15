@@ -11,7 +11,6 @@
     <meta name="robots" content="noindex,nofollow">
     <title>Home - Inventory Application</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
-
     <!-- chartist CSS -->
     <link href="assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
     <link href="assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">

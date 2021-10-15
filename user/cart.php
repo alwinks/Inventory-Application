@@ -5,6 +5,7 @@ if (!$_SESSION['user_id']) {
 }
 include('../config.php');
 $user_id = $_SESSION['user_id'];
+// Update cart as stock * quantity = amount
 $sql = "UPDATE tbl_order INNER JOIN tbl_product ON tbl_order.product_id=tbl_product.product_id SET tbl_order.order_amount=tbl_order.order_quantity*tbl_product.product_rate WHERE user_id='$user_id'";
 mysqli_query($conn, $sql);
 include("header.php");
@@ -41,6 +42,7 @@ include("header.php");
                             <?php
                             include('../config.php');
                             $user_id = $_SESSION['user_id'];
+                            // Display cart
                             $sql1 = "SELECT tbl_product.product_name,tbl_product.product_img,tbl_product.product_desc,tbl_product.product_rate,tbl_order.order_id,tbl_order.order_quantity,tbl_order.order_amount FROM tbl_order INNER JOIN tbl_product ON tbl_order.product_id=tbl_product.product_id INNER JOIN tbl_user ON tbl_order.user_id=tbl_user.user_id WHERE tbl_user.user_id='$user_id' AND order_status='Cart'";
                             $result = mysqli_query($conn, $sql1);
                             if (mysqli_num_rows($result) > 0) {
@@ -56,6 +58,7 @@ include("header.php");
                                     echo "</td></tr>";
                                 }
                                 echo "<tr><td><b>Total</b></td><td></td><td></td><td></td><td></td><td>";
+                                // Display sum of orders
                                 $sql = "SELECT SUM(order_amount) AS total FROM tbl_order WHERE user_id='$user_id' AND order_status='Cart'";
                                 $result = mysqli_query($conn, $sql);
                                 $row = mysqli_fetch_assoc($result);

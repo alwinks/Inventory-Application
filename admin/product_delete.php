@@ -5,6 +5,7 @@ if (!$_SESSION['admin_id']) {
 }
 include('../config.php');
 $product_id = $_GET['product_id'];
+// Delete product
 $sql = "DELETE FROM tbl_product WHERE product_id='$product_id'";
 if (mysqli_query($conn, $sql)) {
   header("Location: products.php");

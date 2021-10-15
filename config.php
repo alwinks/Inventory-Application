@@ -1,4 +1,5 @@
 <?php
+// Check connection
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';

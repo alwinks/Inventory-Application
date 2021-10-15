@@ -8,6 +8,7 @@ if (isset($_POST['card_add'])) {
     $user_id = $_SESSION['user_id'];
     $card_number = $_POST['card_number'];
     $card_cvc = $_POST['card_cvc'];
+    // Add new user card
     $sql = "INSERT INTO tbl_card (user_id,card_number,card_cvc) VALUES ('$user_id','$card_number','$card_cvc')";
     if (mysqli_query($conn, $sql)) {
         header("Location: cards.php");

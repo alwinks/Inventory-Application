@@ -5,6 +5,7 @@ if (!$_SESSION['user_id']) {
 }
 include('../config.php');
 $order_id = $_GET['order_id'];
+// Increase order quantity
 $sql1 = "SELECT order_quantity FROM tbl_order WHERE order_id='$order_id'";
 $result = mysqli_query($conn, $sql1);
 $row = mysqli_fetch_assoc($result);

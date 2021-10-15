@@ -1,4 +1,5 @@
 <?php
+// Add new user details
 include('config.php');
 if (isset($_POST['user_register'])) {
   $user_username = $_POST['user_username'];

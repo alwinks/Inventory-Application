@@ -30,6 +30,7 @@ include("header.php");
                         </thead>
                         <tbody>
                             <?php
+                            // Display products
                             include('config.php');
                             $sql = "SELECT * FROM tbl_product";
                             $result = mysqli_query($conn, $sql);

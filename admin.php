@@ -1,4 +1,5 @@
 <?php
+// Validate admin login details
 session_start();
 include('config.php');
 if (isset($_POST['admin_login'])) {

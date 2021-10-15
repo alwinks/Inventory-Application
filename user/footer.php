@@ -1,5 +1,5 @@
 <!-- footer -->
-<footer class="footer">Alwin Sunny
+<footer class="footer">© Alwin Sunny 2021
 </footer>
 <!-- End footer -->
 </div>
