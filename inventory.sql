@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2021 at 03:15 PM
+-- Generation Time: Oct 15, 2021 at 07:08 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -69,7 +69,7 @@ INSERT INTO `tbl_card` (`card_id`, `user_id`, `card_number`, `card_cvc`) VALUES
 --
 
 CREATE TABLE `tbl_order` (
-  `order_id` int(255) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_quantity` int(255) NOT NULL,
@@ -85,7 +85,7 @@ INSERT INTO `tbl_order` (`order_id`, `product_id`, `user_id`, `order_quantity`, 
 (50, 3, 1, 2, 5000, 'Success'),
 (51, 8, 2, 2, 1200, 'Success'),
 (52, 9, 2, 1, 50000, 'Success'),
-(56, 9, 1, 1, 50000, 'Cart');
+(56, 9, 1, 1, 50000, 'Success');
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,7 @@ CREATE TABLE `tbl_product` (
 INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_img`, `product_desc`, `product_rate`, `product_stock`) VALUES
 (3, 'Usha', 'shopping.png', 'Fan', 2500, 23),
 (8, 'Casio', 'download.jpg', 'Calculator', 600, 13),
-(9, 'HP', 'download (1).jpg', 'Laptop', 50000, 4);
+(9, 'HP', 'download (1).jpg', 'Laptop', 50000, 3);
 
 -- --------------------------------------------------------
 
@@ -176,7 +176,7 @@ ALTER TABLE `tbl_card`
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `order_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
