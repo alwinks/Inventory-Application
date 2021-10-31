@@ -50,7 +50,7 @@ include("header.php");
                                     echo "<td>" . $row['product_stock'] . "</td>";
                                     echo "<td>";
                                     echo "<a href='product_update.php?product_id=" . $row['product_id'] . "'>Update</a>&emsp;";
-                                    echo "<a href='product_delete.php?product_id=" . $row['product_id'] . "'>Delete</a>";
+                                    echo "<a class='text-danger' href='product_delete.php?product_id=" . $row['product_id'] . "'>Delete</a>";
                                     echo "</td></tr>";
                                 }
                             } else {

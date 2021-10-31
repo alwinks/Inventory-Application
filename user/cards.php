@@ -42,7 +42,7 @@ include("header.php");
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr><td>" . $row['card_number'] . "</td>";
                                     echo "<td>";
-                                    echo "<a href='card_delete.php?card_id=" . $row['card_id'] . "'>Delete</a>";
+                                    echo "<a class='text-danger' href='card_delete.php?card_id=" . $row['card_id'] . "'>Delete</a>";
                                     echo "</td></tr>";
                                 }
                             } else {

@@ -54,7 +54,7 @@ include("header.php");
                                     echo "<td><a href='order_quantity_increase.php?order_id=" . $row['order_id'] . "'>+&emsp;</a>" . $row['order_quantity'] . "<a href='order_quantity_decrease.php?order_id=" . $row['order_id'] . "'>&emsp;-</a></td>";
                                     echo "<td>₹" . $row['order_amount'] . "</td>";
                                     echo "<td>";
-                                    echo "<a href='cart_remove.php?order_id=" . $row['order_id'] . "' data-toggle='tooltip'>Remove</a>";
+                                    echo "<a class='text-danger' href='cart_remove.php?order_id=" . $row['order_id'] . "' data-toggle='tooltip'>Remove</a>";
                                     echo "</td></tr>";
                                 }
                                 echo "<tr><td><b>Total</b></td><td></td><td></td><td></td><td></td><td>";
