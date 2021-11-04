@@ -16,49 +16,30 @@ include("header.php");
 <!-- End Bread crumb and right sidebar toggle -->
 <!-- Container fluid  -->
 <div class="container-fluid">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Products</h4>
-                <div class="table-responsive">
-                    <table class="table user-table">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">Name</th>
-                                <th class="border-top-0">Image</th>
-                                <th class="border-top-0">Description</th>
-                                <th class="border-top-0">Rate</th>
-                                <th class="border-top-0">Stock</th>
-                                <th class="border-top-0">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            include('../config.php');
-                            // Display products
-                            $sql = "SELECT * FROM tbl_product WHERE product_stock>0";
-                            $result = mysqli_query($conn, $sql);
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr><td>" . $row['product_name'] . "</td>";
-                                    echo "<td><img src='../images/" . $row['product_img'] . "' height='50px'></td>";
-                                    echo "<td>" . $row['product_desc'] . "</td>";
-                                    echo "<td>₹" . $row['product_rate'] . "</td>";
-                                    echo "<td>" . $row['product_stock'] . "</td>";
-                                    echo "<td>";
-                                    echo "<a href='cart_add.php?product_id=" . $row['product_id'] . "'>Add to Cart</a>&emsp;";
-                                    echo "</td></tr>";
-                                }
-                            } else {
-                                echo "0 results";
-                            }
-                            mysqli_close($conn);
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="card-group col-sm-6">
+        <?php
+        include('../config.php');
+        $obj = new dboperation(); // New object
+        $conn = $obj->dbconn(); // Check connection
+        $obj->product_display(); // Display products where stock above 0
+        $result = $obj->dbexecute(); // Execute query
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='card'>";
+                echo "<img class='card-img-top' src='../assets/images/" . $row['product_img'] . "'>";
+                echo "<div class='card-body'>";
+                echo "<h4 class='card-title'>" . $row['product_name'] . "</h4>";
+                echo "<p class='card-text'>" . $row['product_desc'] . "</p>";
+                echo "<p class='card-text'>₹" . $row['product_rate'] . "</p>";
+                echo "<p class='card-text'>" . $row['product_stock'] . " remaining</p>";
+                echo "<a href='cart_add.php?product_id=" . $row['product_id'] . "' class='btn btn-success mx-auto mx-md-0 text-white'>Add to Cart</a>";
+                echo "</div></div>";
+            }
+        } else {
+            echo "0 results";
+        }
+        mysqli_close($conn);
+        ?>
     </div>
 </div>
 <!-- End Container fluid  -->

@@ -4,6 +4,8 @@ if (!$_SESSION['admin_id']) {
   header("Location: ../admin.php");
 }
 include('../config.php');
+$obj = new dboperation(); // New object
+$conn = $obj->dbconn(); // Check connection
 if (isset($_POST['product_update'])) {
   $product_id = $_GET['product_id'];
   $product_name = $_POST['product_name'];
@@ -11,12 +13,12 @@ if (isset($_POST['product_update'])) {
   $product_desc = $_POST['product_desc'];
   $product_rate = $_POST['product_rate'];
   $product_stock = $_POST['product_stock'];
-  $sql = "UPDATE tbl_product SET product_name='$product_name',product_img='$product_img',product_desc='$product_desc',product_rate='$product_rate',product_stock='$product_stock' WHERE product_id='$product_id'";
-  if (mysqli_query($conn, $sql)) {
+  $obj->product_update($product_id, $product_name, $product_img, $product_desc, $product_rate, $product_stock); // Update product
+  if ($obj->dbexecute()) {
     header("Location: products.php");
     echo "<script>alert('Product updated successfully!');</script>";
   } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error:<br>" . mysqli_error($conn);
   }
 }
 include("header.php");
@@ -40,9 +42,8 @@ include("header.php");
           <form class="form-horizontal form-material mx-2" name="product_update" method="POST" action="<?php $_PHP_SELF ?>">
             <?php
             $product_id = $_GET['product_id'];
-            // Update product
-            $sql = "SELECT * FROM tbl_product WHERE product_id='$product_id'";
-            $result = mysqli_query($conn, $sql);
+            $obj->product_update_display($product_id); // Display product details to update
+            $result = $obj->dbexecute(); // Execute query
             $row = mysqli_fetch_assoc($result);
             ?>
             <div class="form-group">

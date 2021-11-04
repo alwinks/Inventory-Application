@@ -1,12 +1,13 @@
 <?php
-// Validate user login details
 session_start();
 include('config.php');
 if (isset($_POST['user_login'])) {
     $user_username = $_POST['user_username'];
     $user_password = $_POST['user_password'];
-    $sql = "SELECT user_id FROM tbl_user WHERE user_username='$user_username' AND user_password='$user_password'";
-    $result = mysqli_query($conn, $sql);
+    $obj = new dboperation(); // New object
+    $conn = $obj->dbconn(); // Check connection
+    $obj->user_login($user_username, $user_password); // Function to login user
+    $result = $obj->dbexecute(); // Execute query
     if (mysqli_num_rows($result) > 0) {
         header("location: user/index.php");
         echo '<script>alert("Logged in successfully!");</script>';

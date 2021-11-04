@@ -5,10 +5,11 @@ if (!$_SESSION['user_id']) {
 }
 include('../config.php');
 $card_id = $_GET['card_id'];
-// Delete user card
-$sql = "DELETE FROM tbl_card WHERE card_id='$card_id'";
-if (mysqli_query($conn, $sql)) {
+$obj = new dboperation(); // New object
+$conn = $obj->dbconn(); // Check connection
+$obj->card_delete($card_id); // Delete card
+if ($obj->dbexecute()) {
     header("Location: cards.php");
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error:<br>" . mysqli_error($conn);
 }

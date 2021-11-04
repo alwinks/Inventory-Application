@@ -1,15 +1,16 @@
 <?php
-// Add new user details
 include('config.php');
 if (isset($_POST['user_register'])) {
   $user_username = $_POST['user_username'];
   $user_password = $_POST['user_password'];
-  $sql = "INSERT INTO tbl_user (user_username,user_password) VALUES ('$user_username','$user_password')";
-  if (mysqli_query($conn, $sql)) {
+  $obj = new dboperation(); // New object
+  $conn = $obj->dbconn(); // Check connection
+  $obj->user_register($user_username, $user_password); // Function to register new user
+  if ($obj->dbexecute()) {
     header("location: login.php");
     echo "<script>alert('Registered successfully!');</script>";
   } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error:<br>" . mysqli_error($conn);
   }
 }
 include("header.php");

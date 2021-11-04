@@ -4,13 +4,14 @@ if (!$_SESSION['user_id']) {
     header("Location: ../login.php");
 }
 include('../config.php');
+$obj = new dboperation(); // New object
+$conn = $obj->dbconn(); // Check connection
+$user_id = $_SESSION['user_id'];
 if (isset($_POST['order'])) {
-    $user_id = $_SESSION['user_id'];
     $card_number = $_POST['card_number'];
     $card_cvc = $_POST['card_cvc'];
-    // Validate user card details to place order
-    $sql = "SELECT * FROM tbl_card WHERE card_number='$card_number' AND card_cvc='$card_cvc' AND user_id='$user_id'";
-    $result = mysqli_query($conn, $sql);
+    $obj->card_validate($card_number, $card_cvc, $user_id); // Validate card while placing order
+    $result = $obj->dbexecute(); // Execute query
     if (mysqli_num_rows($result) > 0) {
         header("location: order_success.php");
     } else {
@@ -51,10 +52,8 @@ include("header.php");
                         <div class="form-group">
                             <div class="col-sm-12 d-flex">
                                 <?php
-                                $user_id = $_SESSION['user_id'];
-                                // Display sum of orders
-                                $sql = "SELECT SUM(order_amount) AS total FROM tbl_order WHERE user_id='$user_id' AND order_status='Cart'";
-                                $result = mysqli_query($conn, $sql);
+                                $obj->cart_total($user_id); // Display total amount of orders
+                                $result = $obj->dbexecute(); // Execute query
                                 $row = mysqli_fetch_assoc($result);
                                 ?>
                                 <button name="order" type="submit" class="btn btn-success mx-auto mx-md-0 text-white"><?php echo "Pay ₹" . $row['total']; ?></button>
@@ -82,15 +81,12 @@ include("header.php");
                             </thead>
                             <tbody>
                                 <?php
-                                include('../config.php');
-                                $user_id = $_SESSION['user_id'];
-                                // Display order details
-                                $sql = "SELECT tbl_product.product_name,tbl_product.product_img,tbl_product.product_desc,tbl_product.product_rate,tbl_order.order_quantity,tbl_order.order_amount FROM tbl_order INNER JOIN tbl_product ON tbl_order.product_id=tbl_product.product_id INNER JOIN tbl_user ON tbl_order.user_id=tbl_user.user_id WHERE tbl_user.user_id='$user_id' AND order_status='Cart'";
-                                $result = mysqli_query($conn, $sql);
+                                $obj->cart_display($user_id); // Display cart
+                                $result = $obj->dbexecute(); // Execute query
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr><td>" . $row['product_name'] . "</td>";
-                                        echo "<td><img src='../images/" . $row['product_img'] . "' height='50px'></td>";
+                                        echo "<td><img src='../assets/images/" . $row['product_img'] . "' height='50px'></td>";
                                         echo "<td>" . $row['product_desc'] . "</td>";
                                         echo "<td>₹" . $row['product_rate'] . "</td>";
                                         echo "<td>" . $row['order_quantity'] . "</td>";

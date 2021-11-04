@@ -5,10 +5,11 @@ if (!$_SESSION['user_id']) {
 }
 include('../config.php');
 $order_id = $_GET['order_id'];
-// Remove product from cart
-$sql = "DELETE FROM tbl_order WHERE order_id='$order_id'";
-if (mysqli_query($conn, $sql)) {
+$obj = new dboperation(); // New object
+$conn = $obj->dbconn(); // Check connection
+$obj->cart_remove($order_id); // Remove product from cart
+if ($obj->dbexecute()) {
     header("Location: cart.php");
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error:<br>" . mysqli_error($conn);
 }

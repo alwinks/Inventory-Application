@@ -8,13 +8,14 @@ if (isset($_POST['card_add'])) {
     $user_id = $_SESSION['user_id'];
     $card_number = $_POST['card_number'];
     $card_cvc = $_POST['card_cvc'];
-    // Add new user card
-    $sql = "INSERT INTO tbl_card (user_id,card_number,card_cvc) VALUES ('$user_id','$card_number','$card_cvc')";
-    if (mysqli_query($conn, $sql)) {
+    $obj = new dboperation(); // New object
+    $conn = $obj->dbconn(); // Check connection
+    $obj->card_add($user_id, $card_number, $card_cvc); // Add new card
+    if ($obj->dbexecute()) {
         header("Location: cards.php");
         echo "<script>alert('Card added successfully!');</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Error:<br>" . mysqli_error($conn);
     }
 }
 include("header.php");
@@ -23,7 +24,7 @@ include("header.php");
 <div class="page-breadcrumb">
     <div class="row align-items-center">
         <div class="col-md-6 col-8 align-self-center">
-            <h3 class="page-title mb-0 p-0">cards</h3>
+            <h3 class="page-title mb-0 p-0">Cards</h3>
         </div>
     </div>
 </div>

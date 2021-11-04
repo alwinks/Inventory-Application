@@ -10,13 +10,14 @@ if (isset($_POST['product_add'])) {
   $product_desc = $_POST['product_desc'];
   $product_rate = $_POST['product_rate'];
   $product_stock = $_POST['product_stock'];
-  // Add new product
-  $sql = "INSERT INTO tbl_product (product_name,product_img,product_desc,product_rate,product_stock) VALUES ('$product_name','$product_img','$product_desc','$product_rate','$product_stock')";
-  if (mysqli_query($conn, $sql)) {
+  $obj = new dboperation(); // New object
+  $conn = $obj->dbconn(); // Check connection
+  $obj->product_add($product_name, $product_img, $product_desc, $product_rate, $product_stock); // Add new product
+  if ($obj->dbexecute()) {
     header("Location: products.php");
     echo "<script>alert('Product added successfully!');</script>";
   } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error:<br>" . mysqli_error($conn);
   }
 }
 include("header.php");

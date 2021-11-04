@@ -1,12 +1,13 @@
 <?php
-// Validate admin login details
 session_start();
 include('config.php');
 if (isset($_POST['admin_login'])) {
     $admin_username = $_POST['admin_username'];
     $admin_password = $_POST['admin_password'];
-    $sql = "SELECT admin_id FROM tbl_admin WHERE admin_username='$admin_username' AND admin_password='$admin_password'";
-    $result = mysqli_query($conn, $sql);
+    $obj = new dboperation(); // New object
+    $conn = $obj->dbconn(); // Check connection
+    $obj->admin_login($admin_username, $admin_password); // Login admin
+    $result = $obj->dbexecute(); // Execute query
     if (mysqli_num_rows($result) > 0) {
         header("location: admin/index.php");
         echo '<script>alert("Logged in successfully!");</script>';

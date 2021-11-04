@@ -5,16 +5,17 @@ if (!$_SESSION['user_id']) {
 }
 include('../config.php');
 $order_id = $_GET['order_id'];
-// Increase order quantity
-$sql1 = "SELECT order_quantity FROM tbl_order WHERE order_id='$order_id'";
-$result = mysqli_query($conn, $sql1);
+$obj = new dboperation(); // New object
+$conn = $obj->dbconn(); // Check connection
+$obj->quantity($order_id); // Select quantity of order
+$result = $obj->dbexecute(); // Execute query
 $row = mysqli_fetch_assoc($result);
 if ($row['order_quantity'] > 1) {
-  $sql2 = "UPDATE tbl_order SET order_quantity=order_quantity-1 WHERE order_id='$order_id'";
-  if (mysqli_query($conn, $sql2)) {
+  $obj->quantity_dec($order_id); // Decrease quantity of order
+  if ($obj->dbexecute()) {
     header("Location: cart.php");
   } else {
-    echo "Error: " . $sql2 . "<br>" . mysqli_error($conn);
+    echo "Error:<br>" . mysqli_error($conn);
   }
 } else {
   header("Location: cart.php");

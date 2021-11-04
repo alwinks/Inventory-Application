@@ -35,9 +35,10 @@ include("header.php");
                             <?php
                             include('../config.php');
                             $user_id = $_SESSION['user_id'];
-                            // Display cards of user
-                            $sql = "SELECT card_id,card_number FROM tbl_card WHERE user_id='$user_id'";
-                            $result = mysqli_query($conn, $sql);
+                            $obj = new dboperation(); // New object
+                            $conn = $obj->dbconn(); // Check connection
+                            $obj->card_display($user_id); // Display cards
+                            $result = $obj->dbexecute(); // Execute query
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr><td>" . $row['card_number'] . "</td>";

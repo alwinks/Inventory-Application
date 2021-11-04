@@ -38,13 +38,14 @@ include("header.php");
                         <tbody>
                             <?php
                             include('../config.php');
-                            // Display products
-                            $sql = "SELECT * FROM tbl_product";
-                            $result = mysqli_query($conn, $sql);
+                            $obj = new dboperation(); // New object
+                            $conn = $obj->dbconn(); // Check connection
+                            $obj->product_display_all(); // Display all products
+                            $result = $obj->dbexecute(); // Execute query
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr><td>" . $row['product_name'] . "</td>";
-                                    echo "<td><img src='../images/" . $row['product_img'] . "' height='50px'></td>";
+                                    echo "<td><img src='../assets/images/" . $row['product_img'] . "' height='50px'></td>";
                                     echo "<td>" . $row['product_desc'] . "</td>";
                                     echo "<td>₹" . $row['product_rate'] . "</td>";
                                     echo "<td>" . $row['product_stock'] . "</td>";

@@ -5,11 +5,12 @@ if (!$_SESSION['admin_id']) {
 }
 include('../config.php');
 $product_id = $_GET['product_id'];
-// Delete product
-$sql = "DELETE FROM tbl_product WHERE product_id='$product_id'";
-if (mysqli_query($conn, $sql)) {
+$obj = new dboperation(); // New object
+$conn = $obj->dbconn(); // Check connection
+$obj->product_delete($product_id); // Delete product
+if ($obj->dbexecute()) {
   header("Location: products.php");
   echo "<script>alert('Product deleted successfully!');</script>";
 } else {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  echo "Error:<br>" . mysqli_error($conn);
 }
