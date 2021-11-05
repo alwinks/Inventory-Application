@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2021 at 07:58 AM
+-- Generation Time: Nov 05, 2021 at 07:02 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -107,9 +107,9 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`product_id`, `product_name`, `product_img`, `product_desc`, `product_rate`, `product_stock`) VALUES
-(3, 'Usha', 'shopping.png', 'Fan', 2500, 23),
-(8, 'Casio', 'download.jpg', 'Calculator', 600, 13),
-(9, 'HP', 'download (1).jpg', 'Laptop', 50000, 3);
+(3, 'Usha', 'fan.png', 'Fan', 2500, 25),
+(8, 'Casio', 'calculator.jpg', 'Calculator', 600, 15),
+(9, 'HP', 'laptop.jpg', 'Laptop', 50000, 4);
 
 -- --------------------------------------------------------
 
@@ -170,25 +170,25 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_card`
 --
 ALTER TABLE `tbl_card`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
